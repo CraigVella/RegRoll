@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title_extra %}Roll URL{% endblock %}
+{% block content %}
+<div id="centerContent">
+    <div id="rollURLContainer">
+        Below is the roll URL to share:
+        <div id="rollURL">
+            <br /><br />
+            <span class="largeText"><a href="{{ RollURL }}">{{ RollURL }}</a></span>
+            <br /><br />
+        </div>
+    </div>
+</div>
+{% endblock %}

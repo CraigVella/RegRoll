@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+        <title>Star Wars RPG - Registered Roll :: {% block title_extra %}{% endblock %}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+        <link rel="stylesheet" type="text/css" href="{{ System.LibPath }}rr.css">
+        <link rel="stylesheet" type="text/css" href="{{ System.LibPath }}jq/jquery-ui.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ System.LibPath }}jq/jquery-ui.structure.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ System.LibPath }}jq/jquery-ui.theme.min.css">
+        <script type="text/javascript" src="{{ System.LibPath }}jq/external/jquery/jquery.js"></script>
+        <script type="text/javascript" src="{{ System.LibPath }}jq/jquery-ui.min.js"></script>
+        {% endblock %}
+    </head>
+    <body>
+        <div id="topLogo">
+            <div id="middle"><img src="{{ System.LibPath }}img/rr-title.png" alt="RPG Registered Roll" /></div>
+        </div>
+        {% block content %}
+        {% endblock %}
+        <div id="copyright">Copyright &copy; 2015 Resolution Technologies LLC</div>
+    </body>
+</html>

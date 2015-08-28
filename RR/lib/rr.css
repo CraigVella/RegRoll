@@ -1,0 +1,151 @@
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0 0 auto;
+    background-color: #333333;
+    /* background-image: url('img/bg.jpg'); */
+    font-family: 'Arial';
+    color: wheat;
+    font-size: 20px;
+}
+
+img.border {
+    border: 1px black solid;
+}
+
+#topLogo {
+    width: 100%;
+    height: 50px;
+    background-image: url('img/back-fill-50.png');
+    border-bottom: 1px black solid;
+    margin-bottom: 3px;
+}
+
+#middle {
+    width: 50px;
+    height: 50px;
+    background-image: url('img/middle-50.png');
+    background-repeat: no-repeat;
+    padding-left: 50px;
+}
+
+#centerContent {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+p {
+    text-indent: 30px;
+}
+
+#copyright {
+    border-top: 1px black solid;
+    text-align: right;
+    font-size: 10px;
+    color: black;
+    padding-right: 10px;
+    margin-top: 20px;
+}
+
+#selectDie {
+    border: 1px black solid;
+    margin: 2px 2px 10px -1px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+#dieSelect {
+    margin: 1px;
+    width: 100px;
+    height: 160px;
+    text-align: center; 
+    display: inline-block;
+}
+
+.dieSelectButton {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.dieView {
+    margin-left: 25px;
+    width: 50px;
+    height: 50px;
+    border: 1px black solid;
+    text-align: center;
+    background-repeat: none;
+}
+
+#dieSelectedView {
+    margin: 1px;
+    width: 60px;
+    height: 60px;
+    text-align: center; 
+    display: inline-block;
+}
+
+#img-d {
+    background-image: url('img/dice/d.png');
+}
+
+#img-c {
+    background-image: url('img/dice/c.png');
+}
+
+#img-s {
+    background-image: url('img/dice/s.png');
+}
+
+#img-a {
+    background-image: url('img/dice/a.png');
+}
+
+#img-b {
+    background-image: url('img/dice/b.png');
+}
+
+#img-f {
+    background-image: url('img/dice/f.png');
+}
+
+#img-p {
+    background-image: url('img/dice/p.png');
+}
+
+.imgNoBorder {
+    border-collapse: collapse;
+    text-decoration: none;
+}
+
+.smallText {
+    font-size: 12px;
+}
+
+.largeText {
+    font-size: 25px;
+}
+
+#rollURLContainer {
+    text-align: center;
+}
+
+a:link {
+    color: yellow;
+    text-decoration: none;
+}
+
+a:visited {
+    color: yellow;
+    text-decoration: none;
+}
+
+.preRoll {
+    margin-top: 5px;
+    margin-left: 0px;
+}

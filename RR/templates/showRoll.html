@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block title_extra %}Roll{% endblock %}
+{% block content %}
+<script type='text/javascript'>
+    $(function () {
+        $(".upButton").button({
+            icons: {primary: "ui-icon-circle-triangle-n"},
+            text: false
+        });
+        $(".downButton").button({
+            icons: {primary: "ui-icon-circle-triangle-s"},
+            text: false
+        });
+        $("#genBtn").button().click(function () {
+            getLink();
+        });
+    });
+    var Amt = [];
+    Amt['d'] = 0; Amt['c'] = 0; Amt['s'] = 0; Amt['a'] = 0; Amt['b'] = 0; Amt['p'] = 0; Amt['f'] = 0;
+    function sumAndUpdate(d,a) {
+        Amt[d] += a;
+        if (Amt[d] < 0) Amt[d] = 0;
+        if (Amt[d] > 7) Amt[d] = 7;
+        $('#' + d + 'Amt').html(Amt[d]);
+    }
+    function getLink() {
+        var form = document.createElement("form");
+        form.setAttribute("method", "get");
+        form.setAttribute("action", "/rr/roll/{{ RollTable.Id }}/{% if RollTable.AgainstIncluded == 'N' %}d:" + Amt['d'] + "|c:" + Amt['c'] + "|s:" + Amt['s'] + "-{% endif %}a:" + Amt['a'] + "|p:" + Amt['p'] + "|b:" + Amt['b'] + "|f:" + Amt['f']);
+        form.submit();
+    }
+</script>
+<div id="centerContent">
+    Difficulty Die
+    <div id="selectDie">
+        {% if RollTable.RollComplete == 'Y' %}
+            {% for Die in AgainstRollArray %}
+                <div id="dieSelectedView">
+                    <div class="dieView preRoll" style="background-image: url('{{ System.DicePath }}{{ Die.CurrentSideDieLogo }}')"></div>
+                </div>
+            {% endfor %}
+        {% else %}
+            {% if RollTable.AgainstIncluded == 'Y' %}
+                {% for Die in AgainstDiceArray %}
+                <div id="dieSelectedView">
+                    <div class="dieView preRoll" id="img-{{ Die.DieAbbrev }}"></div>
+                </div>
+                {% endfor %}
+            {% else %}
+            <div id="dieSelect">
+                <button class="dieSelectButton upButton" id="dUp" onclick="sumAndUpdate('d',1)"></button><br />
+                <div class="dieView" id="img-d"></div>
+                <button class="dieSelectButton downButton" id="dDown" onclick="sumAndUpdate('d',-1)"></button><br />
+                <span id="dAmt">0</span>
+            </div>
+            <div id="dieSelect">
+                <button class="dieSelectButton upButton" id="cUp" onclick="sumAndUpdate('c',1)"></button><br />
+                <div class="dieView" id="img-c"></div>
+                <button class="dieSelectButton downButton" id="cDown" onclick="sumAndUpdate('c',-1)"></button><br />
+                <span id="cAmt">0</span>
+            </div>
+            <div id="dieSelect">
+                <button class="dieSelectButton upButton" id="sUp" onclick="sumAndUpdate('s',1)"></button><br />
+                <div class="dieView" id="img-s"></div>
+                <button class="dieSelectButton downButton" id="sDown" onclick="sumAndUpdate('s',-1)"></button><br />
+                <span id="sAmt">0</span>
+            </div>
+            {% endif %}
+        {% endif %}
+    </div>
+    Ability Die
+    <div id="selectDie">
+        {% if RollTable.RollComplete == 'Y' %}
+            {% for Die in MyRollArray %}
+                <div id="dieSelectedView">
+                    <div class="dieView preRoll" style="background-image: url('{{ System.DicePath }}{{ Die.CurrentSideDieLogo }}')"></div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div id="dieSelect">
+                <button class="dieSelectButton upButton" id="dUp" onclick="sumAndUpdate('a',1)"></button><br />
+                <div class="dieView" id="img-a"></div>
+                <button class="dieSelectButton downButton" id="dDown" onclick="sumAndUpdate('a',-1)"></button><br />
+                <span id="aAmt">0</span>
+            </div>
+            <div id="dieSelect">
+                <button class="dieSelectButton upButton" id="cUp" onclick="sumAndUpdate('p',1)"></button><br />
+                <div class="dieView" id="img-p"></div>
+                <button class="dieSelectButton downButton" id="cDown" onclick="sumAndUpdate('p',-1)"></button><br />
+                <span id="pAmt">0</span>
+            </div>
+            <div id="dieSelect">
+                <button class="dieSelectButton upButton" id="sUp" onclick="sumAndUpdate('b',1)"></button><br />
+                <div class="dieView" id="img-b"></div>
+                <button class="dieSelectButton downButton" id="sDown" onclick="sumAndUpdate('b',-1)"></button><br />
+                <span id="bAmt">0</span>
+            </div>
+            <div id="dieSelect">
+                <button class="dieSelectButton upButton" id="sUp" onclick="sumAndUpdate('f',1)"></button><br />
+                <div class="dieView" id="img-f"></div>
+                <button class="dieSelectButton downButton" id="sDown" onclick="sumAndUpdate('f',-1)"></button><br />
+                <span id="fAmt">0</span>
+            </div>
+        {% endif %}
+    </div>
+    {% if RollTable.RollComplete == 'N' %}<center><button id="genBtn">Roll 'Em</button></center>{% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title_extra %}Generate Roll{% endblock %}
+{% block content %}
+<script type="text/javascript">
+    $(function () {
+        $(".upButton").button({
+            icons: {primary: "ui-icon-circle-triangle-n"},
+            text: false
+        });
+        $(".downButton").button({
+            icons: {primary: "ui-icon-circle-triangle-s"},
+            text: false
+        });
+        $("#genBtn").button().click(function () {
+            getLink();
+        });
+    });
+    var Amt = [];
+    Amt['d'] = 0; Amt['c'] = 0; Amt['s'] = 0;
+    function sumAndUpdate(d,a) {
+        Amt[d] += a;
+        if (Amt[d] < 0) Amt[d] = 0;
+        if (Amt[d] > 7) Amt[d] = 7;
+        $('#' + d + 'Amt').html(Amt[d]);
+    }
+    function getLink() {
+        var form = document.createElement("form");
+        form.setAttribute("method", "get");
+        form.setAttribute("action", "/rr/generate/d:" + Amt['d'] + "|c:" + Amt['c'] + "|s:" + Amt['s']);
+        form.submit();
+    }
+</script>
+<div id="centerContent">
+    <i>Optionally</i> Select Difficulty, Challenge, or Set Back die
+    <div id="selectDie">
+        <div id="dieSelect">
+            <button class="dieSelectButton upButton" id="dUp" onclick="sumAndUpdate('d',1)"></button><br />
+            <div class="dieView" id="img-d"></div>
+            <button class="dieSelectButton downButton" id="dDown" onclick="sumAndUpdate('d',-1)"></button><br />
+            <span id="dAmt">0</span>
+        </div>
+        <div id="dieSelect">
+            <button class="dieSelectButton upButton" id="cUp" onclick="sumAndUpdate('c',1)"></button><br />
+            <div class="dieView" id="img-c"></div>
+            <button class="dieSelectButton downButton" id="cDown" onclick="sumAndUpdate('c',-1)"></button><br />
+            <span id="cAmt">0</span>
+        </div>
+        <div id="dieSelect">
+            <button class="dieSelectButton upButton" id="sUp" onclick="sumAndUpdate('s',1)"></button><br />
+            <div class="dieView" id="img-s"></div>
+            <button class="dieSelectButton downButton" id="sDown" onclick="sumAndUpdate('s',-1)"></button><br />
+            <span id="sAmt">0</span>
+        </div>
+    </div>
+    <center><button id="genBtn">Generate Roll URL</button></center>
+</div>
+{% endblock %}

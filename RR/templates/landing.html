@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title_extra %}Welcome{% endblock %}
+{% block content %}
+<script type="text/javascript">
+    $(function() {
+        $("button").button().click(function () {
+            window.location.href = "/rr/generate";
+        });
+    });
+</script>
+<div id="centerContent">
+    <p>RPG Registered Roll allows a GM to select a dice pool and hand off the dice to a player to roll. 
+        Once the roll has been completed it is permanently saved.</p>
+    <p>
+        The GM has the right to pick difficulty dice to add to the pool or he may just wish to hand off a registered roll to the player.
+        He also may add a description as a 'comment' to tell the player which ability dice pools he should roll with.
+    </p>
+    <p>
+        Once a Roll has been Generated the URL Link can be sent to the player and he may choose his appropriate dice pool and roll.
+        Once a roll has been cast the link now just serves as a reference point and the player can no longer cast a roll for that link.
+    </p>
+    <center><button>Click Here to Generate Roll</button></center>
+</div>
+{% endblock %}
