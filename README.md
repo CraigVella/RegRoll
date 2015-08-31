@@ -84,5 +84,24 @@ FcgidWrapper "c:/php/php-cgi.exe" .php
 6. Install Composer and Requirements
  * Download and run https://getcomposer.org/Composer-Setup.exe
  * During install select PHP directory
- * 
+ * Make a Directory on the root of C: called Composer
+ * Open up the command prompt and navigate to C:\Composer
+ * Run 'composer require "twig/twig:~1.0"'
+ * Run 'composer require slim/slim:~2.0'
+
+7. Install NetBeans (or other) IDE
+ * Make sure you have JAVA installed
+ * Then install Netbeans PHP IDE located here: https://netbeans.org/downloads/start.html?platform=windows&lang=en&option=php
+ * Open NetBeans
+ * File -> Open Project -> Browse to REPO_DIR/RR
+ * Right Click Project -> Properties -> Run Configuration -> New -> Local Site
  
+8. Configure Local Environment
+ * In the IDE open up 'config.php'
+ * Replace the follwing - Where you see REPO_DIR put your REPO_DIR
+ ```
+const ComposerAutoload = 'C:/composer/vendor/autoload.php';
+const HostName = 'localhost';
+const WebApplicationDirectory = '/rr/';
+const SystemApplicationDirectory = 'REPO_DIR/rr/';
+``` 
