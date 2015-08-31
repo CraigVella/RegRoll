@@ -45,9 +45,11 @@ Results are stored indefinitely at that Roll link and can not be Re-Rolled
  * MySQL is now configured
 
 4. Install Apache
- * Download and install VC14 Redist from http://www.microsoft.com/en-us/download/details.aspx?id=48145
- * Download Apache Build from http://www.apachelounge.com/download/
+ * Download and install VS 2012 Runtimes from http://www.microsoft.com/en-us/download/details.aspx?id=30679
+ * Download Apache VC11 Build from http://www.apachelounge.com/download/VC11/
  * Extract Apache24 Folder to C:\Apache24
+ * Download Apache Modules below the Apache Download (It is a package containing extra modules)
+ * Extract 'mod_fcgid.so' from mod_fcgid-2.3.9\mod_fcgid Folder into 'C:\Apache24\modules' 
  * Open an Elevated Command Prompt (run cmd as Administrator)
  * Navigate to Apache24\bin Directory (CD \Apache24\bin)
  * Run 'httpd -k install' This will install Apache2 as System service
@@ -57,10 +59,19 @@ Results are stored indefinitely at that Roll link and can not be Re-Rolled
  * Find 'DocumentRoot' and set path to REPO_DIR
  * Find '<Directory ' and set path to REPO_DIR
  * Under the <Directory > Tags Find 'AllowOverride None' and change to 'AllowOverride All'
+ * Under the <Directory > Tags Find 'Options Indexes FollowSymLinks' and Change to 'Options Indexes FollowSymLinks ExecCGI'
+ * Find 'DirectoryIndex index.html' and Change to 'DirectoryIndex index.php'
  * Open ApacheMonitor in your System Tray (Next to Clock on desktop) and restart Apache Service
 
 5. Install PHP
  * Download PHP 5.6 from http://windows.php.net/download#php-5.6
  * Extract all contents to C:\php
+ * Open up 'C:\Apache24\conf\httpd.conf' go to end and paste the folowing in:
+```
+LoadModule fcgid_module modules/mod_fcgid.so
+FcgidInitialEnv PHPRC        "c:/php" 
+AddHandler fcgid-script .php  
+FcgidWrapper "c:/php/php-cgi.exe" .php  
+```
  * 
  
