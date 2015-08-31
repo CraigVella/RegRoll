@@ -23,7 +23,7 @@ class RRApplication {
     }
     
     public static function getLibPath() {
-        return RRApplication::getHost() . RRApplication::getWebApplicationDirectory() . 'lib/';
+        return 'http://' . RRApplication::getHost() . RRApplication::getWebApplicationDirectory() . 'lib/';
     }
     
     public function __construct() {
