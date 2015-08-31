@@ -6,16 +6,28 @@ class RRApplication {
     protected $twigObj;
     protected $renderArray;
     
+    public static function getHost() {
+        return 'reztek.net';
+    }
+    
+    public static function getWebApplicationDirectory() {
+        return '/rr/';
+    }
+    
+    public static function getSystemApplicationDirectory() {
+        return '/var/www/html/rr/';
+    }
+    
     public static function getDiceImgPath() {
         return RRApplication::getLibPath() . 'img/dice/';
     }
     
     public static function getLibPath() {
-        return '/rr/lib/';
+        return RRApplication::getHost() . RRApplication::getWebApplicationDirectory() . 'lib/';
     }
     
     public function __construct() {
-        $twigLoader = new Twig_Loader_Filesystem('/var/www/html/rr/templates');
+        $twigLoader = new Twig_Loader_Filesystem(RRApplication::getSystemApplicationDirectory() . 'templates');
         $this->twigObj = new Twig_Environment($twigLoader, array(
             //'cache' => '/var/www/cache',
         ));
@@ -26,7 +38,7 @@ class RRApplication {
     }
     
     public function showExecuteRoll($rollId) {
-        header("Location: /rr/roll/$rollId");
+        header('Location: ' . RRApplication::getWebApplicationDirectory() . "roll/$rollId");
         die();
     }
     
@@ -111,7 +123,7 @@ class RRApplication {
     }
     
     public function showRollURL($rollId) {
-        $this->renderArray['RollURL'] = "http://reztek.net/rr/roll/" . $rollId;
+        $this->renderArray['RollURL'] = 'http://' . RRApplication::getHost() . RRApplication::getWebApplicationDirectory() . 'roll/' . $rollId;
         $this->renderTemplate = $this->twigObj->loadTemplate('URLGet.html');
     }
     

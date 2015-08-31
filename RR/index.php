@@ -29,6 +29,7 @@ $appRoute->get('/generate/:dd', function ($dd) use ($rrApp) {
     // Generate Roll - with difficulty dice
     $rrApp->showRollURL($rrApp->generateRoll($dd));
 });
+
 // REST API ----------------------------------------------
 $api = new RRRest($rrApp);
 $appRoute->get('/rest/getroll/:rollid', function ($rollid) use ($api) {

@@ -18,7 +18,7 @@ class RRRest {
         $rollId = $this->_appInstance->generateRoll($serialAgainst);
         $result = new RESTResult();
         $result->Data['RollID'] = $rollId;
-        $result->Data['RollURL'] = "http://reztek.net/rr/roll/" . $rollId;
+        $result->Data['RollURL'] = 'http://' . RRApplication::getHost() . RRApplication::getWebApplicationDirectory() . 'roll/' . $rollId;
         echo (json_encode($result,JSON_PRETTY_PRINT));
     }
     
