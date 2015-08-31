@@ -47,9 +47,9 @@ abstract class SingleDie {
         $dieArray = array();
         $dieArray['dieAbbr'] = $this->getDieAbbrev();
         $dieArray['dieType'] = $this->getDieName();
-        $dieArray['dieLogo'] = RRApplication::getDiceImgPath() . $this->getDieLogo();
+        $dieArray['dieLogo'] = 'http://' . RRApplication::getDiceImgPath() . $this->getDieLogo();
         $dieArray['dieSide'] = $this->getCurrentSide();
-        $dieArray['dieSImg'] = RRApplication::getDiceImgPath() . $this->getCurrentSideDieLogo();
+        $dieArray['dieSImg'] = 'http://' .  RRApplication::getDiceImgPath() . $this->getCurrentSideDieLogo();
         return $dieArray;
     }
 }
