@@ -1,5 +1,6 @@
 <?php
-require '/var/www/vendor/autoload.php';
+require_once 'config.php';
+require RRConfig::ComposerAutoload;
 require 'lib/EoEDice.php';
 require 'lib/RollTable.php';
 require 'lib/RRApplication.php';

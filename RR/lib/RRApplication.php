@@ -1,4 +1,5 @@
 <?php
+require_once 'config.php';
 
 class RRApplication {
     
@@ -7,15 +8,15 @@ class RRApplication {
     protected $renderArray;
     
     public static function getHost() {
-        return 'reztek.net';
+        return RRConfig::HostName;
     }
     
     public static function getWebApplicationDirectory() {
-        return '/rr/';
+        return RRConfig::WebApplicationDirectory;
     }
     
     public static function getSystemApplicationDirectory() {
-        return '/var/www/html/rr/';
+        return RRConfig::SystemApplicationDirectory;
     }
     
     public static function getDiceImgPath() {
