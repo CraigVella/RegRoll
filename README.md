@@ -66,6 +66,13 @@ Results are stored indefinitely at that Roll link and can not be Re-Rolled
 5. Install PHP
  * Download PHP 5.6 from http://windows.php.net/download#php-5.6
  * Extract all contents to C:\php
+ * Rename 'C:\php\php.ini-production' to 'C:\php\php.ini'
+ * Open 'C:\php\php.ini' uncomment the following
+ * * extension_dir = "ext"
+ * * extension=php_mysql.dll
+ * * extension=php_mysqli.dll
+ * * extension=php_openssl.dll
+ * * extension=php_pdo_mysql.dll
  * Open up 'C:\Apache24\conf\httpd.conf' go to end and paste the folowing in:
 ```
 LoadModule fcgid_module modules/mod_fcgid.so
@@ -73,5 +80,9 @@ FcgidInitialEnv PHPRC        "c:/php"
 AddHandler fcgid-script .php  
 FcgidWrapper "c:/php/php-cgi.exe" .php  
 ```
+
+6. Install Composer and Requirements
+ * Download and run https://getcomposer.org/Composer-Setup.exe
+ * During install select PHP directory
  * 
  
