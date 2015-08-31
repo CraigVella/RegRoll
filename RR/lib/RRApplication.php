@@ -6,6 +6,14 @@ class RRApplication {
     protected $twigObj;
     protected $renderArray;
     
+    public static function getDiceImgPath() {
+        return RRApplication::getLibPath() . 'img/dice/';
+    }
+    
+    public static function getLibPath() {
+        return '/rr/lib/';
+    }
+    
     public function __construct() {
         $twigLoader = new Twig_Loader_Filesystem('/var/www/html/rr/templates');
         $this->twigObj = new Twig_Environment($twigLoader, array(
@@ -13,16 +21,20 @@ class RRApplication {
         ));
         
         $this->renderArray = array();
-        $this->renderArray[System][LibPath] = '/rr/lib/';
-        $this->renderArray[System][DicePath] = $this->renderArray[System][LibPath] . 'img/dice/';
+        $this->renderArray['System']['LibPath'] = RRApplication::getLibPath();
+        $this->renderArray['System']['DicePath'] = RRApplication::getDiceImgPath();
     }
     
-    public function rollEm($rollId, $serialRoll) {
+    public function showExecuteRoll($rollId) {
+        header("Location: /rr/roll/$rollId");
+        die();
+    }
+    
+    public function executeRoll($rollId, $serialRoll) {
         $rt = new RollTable();
         $rt->load($rollId);
         if ($rt->getRollComplete() == RollTable::Yes) {
-            header("Location: /rr/roll/$rollId");
-            die();
+            return;
         }
         if ($rt->getAgainstIncluded() == RollTable::No) {
             // If against was not in table it is now in serial roll
@@ -48,8 +60,6 @@ class RRApplication {
         $rt->setRollDate(time());
         $rt->setRollComplete(RollTable::Yes);
         $rt->save();
-        header("Location: /rr/roll/$rollId");
-        die();
     }
     
     public function showError($error) {
@@ -86,7 +96,7 @@ class RRApplication {
         $this->renderTemplate = $this->twigObj->loadTemplate('generateMain.html');
     }
     
-    public function generateRollURL($diffDie) {
+    public function generateRoll($diffDie) {
         $difficultyCollection = new DiceCollection();
         $difficultyCollection->createPoolFromSerializedDiceAmount($diffDie);
         $roll = new RollTable();
@@ -97,10 +107,11 @@ class RRApplication {
         }
         $roll->setGenDate(time());
         $roll->save();
-        $this->renderArray['RollURL'] = "http://reztek.net/rr/roll/" . $roll->getId();
+        return $roll->getId();
     }
     
-    public function showRollURL() {
+    public function showRollURL($rollId) {
+        $this->renderArray['RollURL'] = "http://reztek.net/rr/roll/" . $rollId;
         $this->renderTemplate = $this->twigObj->loadTemplate('URLGet.html');
     }
     

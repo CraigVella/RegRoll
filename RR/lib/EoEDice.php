@@ -42,6 +42,16 @@ abstract class SingleDie {
     public function getDieName() {
         return $this->_dieName;
     }
+    
+    public function getJsonArray() {
+        $dieArray = array();
+        $dieArray['dieAbbr'] = $this->getDieAbbrev();
+        $dieArray['dieType'] = $this->getDieName();
+        $dieArray['dieLogo'] = RRApplication::getDiceImgPath() . $this->getDieLogo();
+        $dieArray['dieSide'] = $this->getCurrentSide();
+        $dieArray['dieSImg'] = RRApplication::getDiceImgPath() . $this->getCurrentSideDieLogo();
+        return $dieArray;
+    }
 }
 
 class AbilityDie extends SingleDie {
